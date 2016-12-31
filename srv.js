@@ -73,6 +73,9 @@ app.get('/get/:mod', function(req, res) {
                 return '<p>' + line + '</p>';
             })
             .join('\n');
+        if (logs.length=== 0){
+            body = `[logs for ${query.mod} ${query.level||''} not found]`;
+        }
         res.set({
             'Content-Type': 'text/html'
         }).end(body);

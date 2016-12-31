@@ -7,6 +7,7 @@
         "nodejs-log-server": "srv.js"
     },
     "scripts": {
+        "start": "node srv.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
