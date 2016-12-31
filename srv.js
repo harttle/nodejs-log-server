@@ -24,11 +24,12 @@ var Log = mongoose.model('log', LogSchema);
 
 app.get('/post/:mod', function(req, res) {
     res.status(202).end("saving log on " + Date());
+    var msg = decodeURIComponent(req.query.msg || '');
 
     Log.create({
         level: req.query.level || 'log',
         mod: req.params.mod,
-        msg: req.query.msg
+        msg: msg
     });
 });
 
