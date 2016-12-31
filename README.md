@@ -36,6 +36,13 @@ Installation:
 npm install nodejs-log-server
 ```
 
+Env Variables:
+
+```bash
+# port default to 8777
+export PORT=8777
+```
+
 Start:
 
 ```

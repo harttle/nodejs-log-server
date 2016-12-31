@@ -1,10 +1,10 @@
 {
     "name": "nodejs-log-server",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "This is just a simple log server with nodejs and MongoDB (mongoose)",
     "main": "srv.js",
     "bin": {
-        "nodejs-log-server": "node srv.js"
+        "nodejs-log-server": "srv.js"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,3 +1,5 @@
+#!/bin/env node
+
 var app = require('express')(),
     mongoose = require('mongoose'),
     help = require('fs').readFileSync(__dirname + '/README.md', 'utf8'),
