@@ -1,27 +1,27 @@
 {
-    "name": "nodejs-log-server",
-    "version": "0.0.3",
-    "description": "This is just a simple log server with nodejs and MongoDB (mongoose)",
-    "main": "srv.js",
-    "bin": {
-        "nodejs-log-server": "srv.js"
-    },
-    "scripts": {
-        "start": "node srv.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/harttle/nodejs-log-server.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/harttle/nodejs-log-server/issues"
-    },
-    "homepage": "https://github.com/harttle/nodejs-log-server#readme",
-    "dependencies": {
-        "express": "^4.14.0",
-        "mongoose": "^4.7.5"
-    }
+  "name": "nodejs-log-server",
+  "version": "0.0.4",
+  "description": "This is just a simple log server with nodejs and MongoDB (mongoose)",
+  "main": "srv.js",
+  "bin": {
+    "nodejs-log-server": "srv.js"
+  },
+  "scripts": {
+    "start": "node srv.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harttle/nodejs-log-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harttle/nodejs-log-server/issues"
+  },
+  "homepage": "https://github.com/harttle/nodejs-log-server#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.7.5"
+  }
 }
