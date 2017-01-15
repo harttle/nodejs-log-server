@@ -9,7 +9,7 @@ var viewsDir = path.resolve(__dirname, 'views/');
 
 // template engine
 var engine = Liquid({
-    root: viewsDir ,
+    root: viewsDir,
     extname: '.html',
     cache: process.env.NODE_ENV === 'production'
 });
@@ -52,12 +52,15 @@ app.get('/get/:mod?', function(req, res) {
     if (req.query.level) {
         query.level = req.query.level;
     }
-    Log.find(query, function(e, logs) {
-        if (e) return res.status(500).end(e.stack);
-        res.locals.pkg = pkg;
-        if (logs.length === 0) res.render('empty', query);
-        else res.render('logs', { logs: logs });
-    });
+    Log.find(query).sort({ date: 1 })
+        .then(function(logs) {
+            res.locals.pkg = pkg;
+            if (logs.length === 0) res.render('empty', query);
+            else res.render('logs', { logs: logs });
+        })
+        .catch(function(e) {
+            res.status(500).end(e.stack);
+        });
 });
 
 app.get('/', function(req, res) {
