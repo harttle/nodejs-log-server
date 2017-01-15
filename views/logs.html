@@ -3,11 +3,27 @@
 <ul class="log-list">
   {% for log in logs %}
   <li class="log-item {{log.level}}">
-    <span class="date">[{{log.date | date: '%Y-%m-%d %H:%M:%S'}}]</span>
+    <span class="date">[{{log.dateISOStr}}]</span>
     <span class="level">{{log.level}}</span>
     <span class="mod">[{{log.mod}}]</span>
     <span class="msg">{{log.msg}}</span>
   </li>
   {% endfor %}
 </ul>
+<script>
+  document.querySelectorAll('.date').forEach(function(el){
+    var date = new Date(el.innerHTML.slice(1, -1));
+    el.innerHTML = format(date);
+  });
+  function format(date) {
+    var mm = date.getMonth() + 1;
+    var dd = date.getDate();
+    var yyymmdd = [date.getFullYear(),
+      (mm>9 ? '' : '0') + mm,
+      (dd>9 ? '' : '0') + dd
+    ].join('-');
+    var HMS = date.toTimeString().split(' ')[0];
+    return yyymmdd + ' ' + HMS;
+  };
+</script>
 {% endblock %}

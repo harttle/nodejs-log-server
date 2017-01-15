@@ -55,8 +55,9 @@ app.get('/get/:mod?', function(req, res) {
     Log.find(query).sort({ date: 1 })
         .then(function(logs) {
             res.locals.pkg = pkg;
-            if (logs.length === 0) res.render('empty', query);
-            else res.render('logs', { logs: logs });
+            if (logs.length === 0) return res.render('empty', query);
+            logs.forEach(log => log.dateISOStr = log.date.toISOString())
+            res.render('logs', { logs: logs });
         })
         .catch(function(e) {
             res.status(500).end(e.stack);
