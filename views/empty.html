@@ -1,0 +1,6 @@
+{% layout 'layout' %}
+{% block %}
+<p class="empty-alert">
+  [logs not found] id {{mod | default: 'all'}}, {{level | default: 'all'}};
+</p>
+{% endblock %}

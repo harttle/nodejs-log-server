@@ -1,0 +1,13 @@
+{% layout 'layout' %}
+{% block %}
+<ul class="log-list">
+  {% for log in logs %}
+  <li class="log-item {{log.level}}">
+    <span class="date">[{{log.date | date: '%Y-%m-%d %H:%M:%S'}}]</span>
+    <span class="level">{{log.level}}</span>
+    <span class="mod">[{{log.mod}}]</span>
+    <span class="msg">{{log.msg}}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

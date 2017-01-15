@@ -23,6 +23,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "marked": "^0.3.6",
-    "mongoose": "^4.7.5"
+    "mongoose": "^4.7.5",
+    "shopify-liquid": "^1.6.1"
   }
 }

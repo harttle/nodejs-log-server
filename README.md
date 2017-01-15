@@ -22,6 +22,12 @@ GET /delete/foo
 GET /delete
 ```
 
+Parameters:
+
+* `ID` (URL param) is used to trace the specific logger, can be arbitrary string.
+* `level` (URL query) is used to filter log messages, typically be one of `debug`, `log`, `info`, `warn`, `error`.
+* `msg` (URL query) contains the actual log message.
+
 # Server Side Usage
 
 Installation:
