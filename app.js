@@ -7,15 +7,16 @@ var Log = require('./models/log');
 var help = marked(require('fs').readFileSync(__dirname + '/README.md', 'utf8'));
 var path = require('path');
 var pkg = require('./package.json');
+var viewsDir = path.resolve(__dirname, 'views/');
 
 // template engine
 var engine = Liquid({
-    root: path.resolve(__dirname, 'views/'),
+    root: viewsDir ,
     extname: '.html',
     cache: process.env.NODE_ENV === 'production'
 });
 app.engine('html', engine.express());
-app.set('views', './views');
+app.set('views', viewsDir);
 app.set('view engine', 'html');
 
 // routes
