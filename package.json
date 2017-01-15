@@ -22,6 +22,7 @@
   "homepage": "https://github.com/harttle/nodejs-log-server#readme",
   "dependencies": {
     "express": "^4.14.0",
+    "marked": "^0.3.6",
     "mongoose": "^4.7.5"
   }
 }

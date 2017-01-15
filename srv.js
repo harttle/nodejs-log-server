@@ -1,8 +1,9 @@
 #!/bin/env node
 
 var app = require('express')(),
+    marked = require('marked'),
     mongoose = require('mongoose'),
-    help = require('fs').readFileSync(__dirname + '/README.md', 'utf8'),
+    help = marked(require('fs').readFileSync(__dirname + '/README.md', 'utf8')),
     Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://localhost/logs');
@@ -33,58 +34,52 @@ app.get('/post/:mod', function(req, res) {
     });
 });
 
-app.get('/delete/:mod', function(req, res) {
-    Log.remove({
-        mod: req.params.mod
-    }, function(e, ret) {
-        if (e) {
-            res.status(500).end(e.stack);
-            return;
-        }
-        var result = ret.result;
-        res
-            .set({
-                'Content-Type': 'text/plain'
-            })
-            .end(result.n + ' logs removed');
-    });
-});
-
-app.get('/get/:mod', function(req, res) {
-    var query = {
-        mod: req.params.mod
-    };
+app.get('/delete/:mod?', function(req, res) {
+    var query = {};
+    if (req.params.mod) {
+        query.mod = req.params.mod;
+    }
     if (req.query.level) {
-        query.level = req.query.level
-    };
-    Log.find(query, function(e, logs) {
-        if (e) {
-            res.status(500).end(e.stack);
-            return;
-        }
-        var body = logs
-            .map(function logLine(log) {
-                return '[' + log.date.toISOString() + ']' +
-                    '[' + log.mod + ']' +
-                    '[' + log.level + '] ' +
-                    log.msg;
-            })
-            .map(function logParagraph(line) {
-                return '<p>' + line + '</p>';
-            })
-            .join('\n');
-        if (logs.length=== 0){
-            body = `[logs for ${query.mod} ${query.level||''} not found]`;
-        }
-        res.set({
-            'Content-Type': 'text/html'
-        }).end(body);
+        query.level = req.query.level;
+    }
+    Log.remove(query, function(e, ret) {
+        if (e) return res.status(500).end(e.stack);
+        var result = ret.result;
+        res.end(result.n + ' logs removed');
     });
 });
 
-app.get('/help', function(req, res) {
+app.get('/get/:mod?', function(req, res) {
+    var query = {};
+    if (req.params.mod) {
+        query.mod = req.params.mod;
+    }
+    if (req.query.level) {
+        query.level = req.query.level;
+    }
+    Log.find(query, function(e, logs) {
+        if (e) return res.status(500).end(e.stack);
+        var body = logs.map(render).join('\n');
+        if (logs.length === 0) {
+            var idstr = `id: ${query.mod || 'all'}`;
+            var levelstr = `level: ${query.mod || 'all'}`;
+            body = `[logs not found] ${idstr}, ${levelstr}`;
+        }
+        res.set({ 'Content-Type': 'text/html' }).end(body);
+    });
+});
+
+app.get('/', function(req, res) {
     res.end(help);
 });
+
+function render(log) {
+    var line = '[' + log.date.toISOString() + ']' +
+        '[' + log.mod + ']' +
+        '[' + log.level + '] ' +
+        log.msg;
+    return '<p>' + line + '</p>';
+}
 
 var port = process.env.PORT || 8777;
 app.listen(port, function() {

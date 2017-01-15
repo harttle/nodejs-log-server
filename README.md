@@ -2,30 +2,24 @@ This is just a simple log server with nodejs and MongoDB (mongoose)
 
 # Client Side Usage
 
-Sending logs:
-
 ```bash
-GET /post/<trace-id>?msg=<message>&level=<level>
-# Example:
+# Sending logs with ID `foo` and Level `error`:
 GET /post/foo?msg=firstLog&level=error
-```
 
-Checking logs:
-
-```bash
-GET /get/<trace-id>?level=<level>
-# Example:
+# Retrieve logs with ID `foo` and Level `error`
 GET /get/foo?level=error
-```
 
-> If `level` not set, prints all logs.
+# Retrieve logs of all levels with ID `foo`
+GET /get/foo?level=error
 
-Clearing logs:
+# Retrieve logs from all modules
+GET /get?level=error
 
-```bash
-GET /delete/<trace-id>
-# Example:
+# Delete logs with ID `foo`
 GET /delete/foo
+
+# Clear logs from all IDs
+GET /delete
 ```
 
 # Server Side Usage
