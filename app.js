@@ -1,5 +1,3 @@
-#!/bin/env node
-
 var app = require('express')();
 var Liquid = require('shopify-liquid');
 var marked = require('marked');
