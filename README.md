@@ -1,4 +1,4 @@
-This is just a simple log server with nodejs and MongoDB (mongoose) 
+This is just a simple log server powered by Nodejs and MongoDB
 
 # Client Side Usage
 
@@ -12,7 +12,7 @@ GET /get/foo?level=error
 # Retrieve logs of all levels with ID `foo`
 GET /get/foo?level=error
 
-# Retrieve logs from all modules
+# Retrieve logs from all IDs
 GET /get?level=error
 
 # Delete logs with ID `foo`
