@@ -1,6 +1,6 @@
 {
   "name": "nodejs-log-server",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "This is just a simple log server with nodejs and MongoDB (mongoose)",
   "main": "srv.js",
   "bin": {
