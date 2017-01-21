@@ -19,13 +19,17 @@ app.set('view engine', 'html');
 
 // routes
 app.get('/post/:mod', function(req, res) {
-    res.status(202).end('Log received.');
     var msg = decodeURIComponent(req.query.msg || '');
 
     Log.create({
         level: req.query.level || 'log',
         mod: req.params.mod,
         msg: msg
+    }, function(e){
+        if(e){
+            return res.status(500).end(e.stack);
+        }
+        res.status(201).end('Log saved.');
     });
 });
 
